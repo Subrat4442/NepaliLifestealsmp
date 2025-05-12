@@ -6,22 +6,54 @@ Nepali smp
   <title>Nepali Lifesteal SMP</title>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Kanit', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: white;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
+                  url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Mt._Machhapuchhre.jpg/1920px-Mt._Machhapuchhre.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: "";
+      background: url('https://wallpapercave.com/wp/wp2757874.png') no-repeat center bottom;
+      background-size: cover;
+      opacity: 0.08;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, main, footer {
+      position: relative;
+      z-index: 1;
     }
 
     header {
       text-align: center;
       padding: 2rem 1rem;
-      background-color: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      border-bottom: 2px solid #ff4d4d;
+      box-shadow: 0 4px 20px rgba(255, 77, 77, 0.3);
     }
 
     h1 {
       font-size: 3rem;
       margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 8px #000;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    p {
+      animation: fadeIn 1.5s ease-out;
     }
 
     main {
@@ -29,23 +61,37 @@ Nepali smp
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      padding: 2rem;
+      padding: 3rem 2rem;
     }
 
     .card {
-      background-color: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(30,30,30,0.6));
+      border: 2px solid rgba(255, 77, 77, 0.5);
       border-radius: 15px;
-      border: 2px solid #ff4d4d;
       padding: 1.5rem;
       width: 300px;
       max-width: 90%;
-      box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
+      transition: all 0.4s ease;
+      animation: fadeUp 1s ease forwards;
+      opacity: 0;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+
+    .card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 40px rgba(255, 77, 77, 0.6);
     }
 
     .card h2 {
+      color: #ff4d4d;
       margin-top: 0;
       font-size: 1.8rem;
-      color: #ff4d4d;
+      text-shadow: 1px 1px 5px #000;
     }
 
     .features, .rules {
@@ -57,26 +103,63 @@ Nepali smp
       font-size: 1.3rem;
       margin: 1rem 0;
       padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
       border: 1px solid #ff4d4d;
       word-wrap: break-word;
+      box-shadow: inset 0 0 10px rgba(255, 77, 77, 0.2);
     }
 
     .socials a {
       display: inline-block;
-      margin: 0.25rem 0.5rem;
+      margin: 0.3rem 0.5rem;
+      padding: 0.5rem 1rem;
       text-decoration: none;
-      color: #ff4d4d;
+      color: white;
       font-weight: bold;
+      background: linear-gradient(45deg, #ff4d4d, #ff7373);
+      border-radius: 8px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px rgba(255, 77, 77, 0.5);
+    }
+
+    .socials a:hover {
+      background: linear-gradient(45deg, #ff7373, #ff4d4d);
+      box-shadow: 0 0 25px rgba(255, 77, 77, 0.8);
+      transform: scale(1.05);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .gallery img {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+      animation: fadeIn 2s ease forwards;
+      opacity: 0;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
     }
 
     footer {
       text-align: center;
-      margin-top: 3rem;
-      padding: 1rem;
+      margin-top: 4rem;
+      padding: 2rem;
       font-size: 0.9rem;
-      opacity: 0.8;
+      color: #ccc;
+      background: rgba(0, 0, 0, 0.4);
+      border-top: 1px solid #ff4d4d;
     }
 
     hr {
@@ -84,6 +167,34 @@ Nepali smp
       height: 1px;
       background: #fff;
       opacity: 0.1;
+      margin: 0.8rem 0;
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        transform: translateY(-40px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
@@ -124,8 +235,8 @@ Nepali smp
       <p>Supported Versions: 1.20 and above</p>
       <h3>📲 Connect With Us</h3>
       <div class="socials">
-        <a href="https://discord.gg/gfKGADwz">Discord</a><br/>
-        <a href="https://www.youtube.com/@Sushant.Yt.94z">YouTube</a><br/>
+        <a href="https://discord.gg/gfKGADwz">Discord</a>
+        <a href="https://www.youtube.com/@Sushant.Yt.94z">YouTube</a>
         <a href="https://m.me/j/Abat1aHVrKh4Ni4T/">Facebook</a>
       </div>
     </div>
@@ -156,9 +267,24 @@ Nepali smp
     </div>
   </main>
 
+  <!-- 📸 Image Gallery Section -->
+  <section class="gallery">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Mount_Everest_as_seen_from_Drukair2_PLW_edit.jpg" 
+       alt="Mount Everest Nepal" loading="lazy" width="300" height="200">
+  <img src="https://static.planetminecraft.com/files/resource_media/screenshot/1813/mcbuild_2500401.jpg" 
+       alt="Minecraft Castle Build" loading="lazy" width="300" height="200">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Patan_Durbar_Square%2C_Nepal.jpg" 
+       alt="Patan Durbar Square Nepal" loading="lazy" width="300" height="200">
+  <img src="https://wallpapercave.com/wp/wp6906403.jpg" 
+       alt="Minecraft Village Night" loading="lazy" width="300" height="200">
+</section>
+
+
   <footer>
     © 2025 Nepali Lifesteal SMP | Made with ❤️ for Nepali Warriors
   </footer>
 
 </body>
 </html>
+
+ 
