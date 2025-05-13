@@ -99,15 +99,60 @@ Nepali smp
       padding-left: 1rem;
     }
 
-    .ip-box {
-      font-size: 1.3rem;
+    .ip-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin: 1rem 0;
-      padding: 1rem;
+    }
+
+    .ip-box {
+      font-size: 1.2rem;
+      padding: 0.8rem 1.2rem;
       background-color: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
       border: 1px solid #ff4d4d;
-      word-wrap: break-word;
       box-shadow: inset 0 0 10px rgba(255, 77, 77, 0.2);
+      flex-grow: 1;
+    }
+
+    .copy-btn {
+      padding: 0.6rem 1rem;
+      background: linear-gradient(45deg, #ff4d4d, #ff7373);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+      transition: 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: linear-gradient(45deg, #ff7373, #ff4d4d);
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.8);
+      transform: scale(1.05);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .socials a {
@@ -231,7 +276,10 @@ Nepali smp
     <div class="card">
       <h2>🌐 Join Now</h2>
       <p>Server IP:</p>
-      <div class="ip-box">NepaliSMP.aternos.me:53729</div>
+      <div class="ip-container">
+        <div class="ip-box" id="server-ip">NepaliSMP.aternos.me:53729</div>
+        <button class="copy-btn" onclick="copyIP()">📋 Copy</button>
+      </div>
       <p>Supported Versions: 1.20 and above</p>
       <h3>📲 Connect With Us</h3>
       <div class="socials">
@@ -267,24 +315,34 @@ Nepali smp
     </div>
   </main>
 
-  <!-- 📸 Image Gallery Section -->
   <section class="gallery">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Mount_Everest_as_seen_from_Drukair2_PLW_edit.jpg" 
-       alt="Mount Everest Nepal" loading="lazy" width="300" height="200">
-  <img src="https://static.planetminecraft.com/files/resource_media/screenshot/1813/mcbuild_2500401.jpg" 
-       alt="Minecraft Castle Build" loading="lazy" width="300" height="200">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Patan_Durbar_Square%2C_Nepal.jpg" 
-       alt="Patan Durbar Square Nepal" loading="lazy" width="300" height="200">
-  <img src="https://wallpapercave.com/wp/wp6906403.jpg" 
-       alt="Minecraft Village Night" loading="lazy" width="300" height="200">
-</section>
-
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Mount_Everest_as_seen_from_Drukair2_PLW_edit.jpg" alt="Mount Everest Nepal">
+    <img src="https://static.planetminecraft.com/files/resource_media/screenshot/1813/mcbuild_2500401.jpg" alt="Minecraft Castle Build">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Patan_Durbar_Square%2C_Nepal.jpg" alt="Patan Durbar Square Nepal">
+    <img src="https://wallpapercave.com/wp/wp6906403.jpg" alt="Minecraft Village Night">
+  </section>
 
   <footer>
     © 2025 Nepali Lifesteal SMP | Made with ❤️ for Nepali Warriors
   </footer>
 
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">IP Copied!</div>
+
+  <script>
+    function copyIP() {
+      const ip = document.getElementById("server-ip").innerText;
+      navigator.clipboard.writeText(ip).then(() => {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2000);
+      }).catch(err => {
+        console.error("Copy failed:", err);
+      });
+    }
+  </script>
+
 </body>
 </html>
-
- 
