@@ -1,4 +1,4 @@
-Nepali smp
+Nepali Lifesteal Smp
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
