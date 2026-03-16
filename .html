@@ -1,164 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nepali Lifesteal SMP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Kanit', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
-    }
+<title>Student Registration Form</title>
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
+<style>
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
 
-    main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      padding: 2rem;
-    }
+.container{
+    width: 400px;
+    background: white;
+    margin: 50px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+}
 
-    .card {
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 15px;
-      border: 2px solid #ff4d4d;
-      padding: 1.5rem;
-      width: 300px;
-      max-width: 90%;
-      box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
-    }
+h2{
+    text-align: center;
+}
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 1.8rem;
-      color: #ff4d4d;
-    }
+label{
+    font-weight: bold;
+}
 
-    .features, .rules {
-      text-align: left;
-      padding-left: 1rem;
-    }
+input, select, textarea{
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
 
-    .ip-box {
-      font-size: 1.3rem;
-      margin: 1rem 0;
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      border: 1px solid #ff4d4d;
-      word-wrap: break-word;
-    }
+.gender{
+    width: auto;
+}
 
-    .socials a {
-      display: inline-block;
-      margin: 0.25rem 0.5rem;
-      text-decoration: none;
-      color: #ff4d4d;
-      font-weight: bold;
-    }
+button{
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #2575fc;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding: 1rem;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
+button:hover{
+    background: #1a5ad7;
+}
 
-    hr {
-      border: none;
-      height: 1px;
-      background: #fff;
-      opacity: 0.1;
-    }
-  </style>
+.reset{
+    background: #ff4d4d;
+}
+
+.reset:hover{
+    background: #cc0000;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+}
+
+</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>💔 Nepali Lifesteal SMP 🇳🇵</h1>
-    <p>Where PvP means power — steal hearts, dominate, and survive</p>
-  </header>
+<div class="container">
 
-  <main>
-    <div class="card">
-      <h2>🔪 What is Lifesteal SMP?</h2>
-      <ul class="features">
-        <li>❤️ Kill players to steal their hearts</li>
-        <li>⚰️ Lose all hearts? You're banned (for a time)</li>
-        <li>🛡️ Hardcore survival meets PvP strategy</li>
-        <li>🏰 Build, raid, and defend your base</li>
-        <li>🌐 24/7 Online | Low Lag | Hosted in Asia</li>
-      </ul>
-    </div>
+<h2>Student Registration</h2>
 
-    <div class="card">
-      <h2>📜 Rules</h2>
-      <ul class="rules">
-        <li>❌ No hacking or unfair mods (instant ban)</li>
-        <li>🤝 Respect allies & enemies alike</li>
-        <li>🔥 Griefing/raiding allowed — it’s Lifesteal!</li>
-        <li>📢 No spam or advertising</li>
-        <li>🎮 Play fair, fight smart, and have fun</li>
-      </ul>
-    </div>
+<form id="studentForm">
 
-    <div class="card">
-      <h2>🌐 Join Now</h2>
-      <p>Server IP:</p>
-      <div class="ip-box">NepaliSMP.aternos.me:53729</div>
-      <p>Supported Versions: 1.20 and above</p>
-      <h3>📲 Connect With Us</h3>
-      <div class="socials">
-        <a href="https://discord.gg/gfKGADwz">Discord</a><br/>
-        <a href="https://www.youtube.com/@Sushant.Yt.94z">YouTube</a><br/>
-        <a href="https://m.me/j/Abat1aHVrKh4Ni4T/">Facebook</a>
-      </div>
-    </div>
+<label>First Name</label>
+<input type="text" id="fname" required>
 
-    <div class="card">
-      <h2>🛒 Shop & Ranks</h2>
-      <ul class="features">
-        <li><strong>🥉 Bronze Rank</strong><br/>➤ Starter Kit, /home, Colored Name<br/><em>Free</em></li>
-        <hr>
-        <li><strong>🥈 Silver Rank</strong><br/>➤ Daily Crates, Extra SetHome, /craft<br/><em>Invite 3 friends</em></li>
-        <hr>
-        <li><strong>🥇 Gold Rank</strong><br/>➤ /fly, Custom Prefix, Special Crate Keys<br/><em>Contact Admin</em></li>
-        <hr>
-        <li><strong>🎖️ VIP Rank</strong><br/>➤ Access to VIP area, /nick, Custom Skins<br/><em>Giveaway/Donation</em></li>
-        <hr>
-        <li><strong>📹 YouTuber Rank</strong><br/>➤ YT Tag, /broadcast, Media Kit<br/><em>Minimum 100+ subs</em></li>
-        <hr>
-        <li><strong>🛠️ Helper Rank</strong><br/>➤ Mute/Kick, Staff Chat, /helpop access<br/><em>Apply on Discord</em></li>
-        <hr>
-        <li><strong>🛡️ Admin Rank</strong><br/>➤ Full Permissions, Server Management Tools<br/><em>Staff Only</em></li>
-        <hr>
-        <li><strong>👑 Leader Rank</strong><br/>➤ Owner Tag, All Permissions, Special Effects<br/><em>Server Founder</em></li>
-      </ul>
-      <p>🎁 Most ranks are cosmetic or staff-only and do not break fair gameplay.</p>
-      <div class="socials">
-        <a href="https://discord.gg/gfKGADwz">Apply or Donate via Discord</a>
-      </div>
-    </div>
-  </main>
+<label>Last Name</label>
+<input type="text" id="lname" required>
 
-  <footer>
-    © 2025 Nepali Lifesteal SMP | Made with ❤️ for Nepali Warriors
-  </footer>
+<label>Email</label>
+<input type="email" id="email" required>
+
+<label>Password</label>
+<input type="password" id="password" required>
+
+<label>Gender</label><br>
+<input type="radio" name="gender" value="Male" class="gender"> Male
+<input type="radio" name="gender" value="Female" class="gender"> Female
+<input type="radio" name="gender" value="Other" class="gender"> Other
+<br><br>
+
+<label>Date of Birth</label>
+<input type="date" id="dob">
+
+<label>Course</label>
+<select id="course">
+<option>BCA</option>
+<option>BBA</option>
+<option>B.Tech</option>
+<option>MBA</option>
+</select>
+
+<label>Address</label>
+<textarea id="address" rows="3"></textarea>
+
+<div class="btns">
+<button type="submit">Register</button>
+<button type="reset" class="reset">Reset</button>
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+document.getElementById("studentForm").addEventListener("submit", function(event){
+
+    event.preventDefault(); // stop page refresh
+
+    let fname = document.getElementById("fname").value;
+    let lname = document.getElementById("lname").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let dob = document.getElementById("dob").value;
+    let course = document.getElementById("course").value;
+    let address = document.getElementById("address").value;
+
+    let gender = document.querySelector('input[name="gender"]:checked');
+
+    console.log("Student Registration Data");
+    console.log("First Name:", fname);
+    console.log("Last Name:", lname);
+    console.log("Email:", email);
+    console.log("Password:", password);
+    console.log("Gender:", gender ? gender.value : "Not selected");
+    console.log("Date of Birth:", dob);
+    console.log("Course:", course);
+    console.log("Address:", address);
+
+});
+
+</script>
 
 </body>
 </html>
