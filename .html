@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 <head>
 <title>Student Registration Form</title>
@@ -68,6 +68,34 @@ button:hover{
     justify-content: space-between;
 }
 
+#output{
+    margin-top:20px;
+}
+
+.admin-box{
+    margin-top: 30px;
+    padding: 15px;
+    border-top: 2px solid #ccc;
+}
+
+.student-card{
+    border:1px solid gray;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:5px;
+}
+
+.delete-btn{
+    background:red;
+    width:100%;
+    margin-top:5px;
+}
+
+.top-controls button{
+    width: auto;
+    margin: 5px 5px 10px 0;
+}
+
 </style>
 </head>
 
@@ -90,11 +118,13 @@ button:hover{
 
 <label>Password</label>
 <input type="password" id="password" required>
+<label> Show Password</label>
+<input type="checkbox" onclick="togglePassword()"><br>
 
 <label>Gender</label><br>
-<input type="radio" name="gender" value="Male" class="gender"> Male
-<input type="radio" name="gender" value="Female" class="gender"> Female
-<input type="radio" name="gender" value="Other" class="gender"> Other
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+<input type="radio" name="gender" value="Other"> Other
 <br><br>
 
 <label>Date of Birth</label>
@@ -118,13 +148,46 @@ button:hover{
 
 </form>
 
+<div id="output"></div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-box">
+
+<h3>Admin Login</h3>
+<input type="password" id="adminPass" placeholder="Enter Admin Password">
+<button onclick="adminLogin()">Login</button>
+
+<div id="adminPanel" style="display:none;">
+
+<div class="top-controls">
+<p>Total Students: <b id="count">0</b></p>
+
+<input type="text" id="search" placeholder="Search..." onkeyup="searchStudent()">
+
+<br>
+
+<button onclick="exportData()">Export</button>
+<button onclick="clearAll()">Clear All</button>
+<button onclick="adminLogout()">Logout</button>
+</div>
+
+<h3>Registered Students</h3>
+<div id="adminData"></div>
+
+</div>
+
+</div>
+
 </div>
 
 <script>
 
+const ADMIN_PASSWORD = "admin123";
+
+// REGISTER
 document.getElementById("studentForm").addEventListener("submit", function(event){
 
-    event.preventDefault(); // stop page refresh
+    event.preventDefault();
 
     let fname = document.getElementById("fname").value;
     let lname = document.getElementById("lname").value;
@@ -136,17 +199,146 @@ document.getElementById("studentForm").addEventListener("submit", function(event
 
     let gender = document.querySelector('input[name="gender"]:checked');
 
-    console.log("Student Registration Data");
-    console.log("First Name:", fname);
-    console.log("Last Name:", lname);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Gender:", gender ? gender.value : "Not selected");
-    console.log("Date of Birth:", dob);
-    console.log("Course:", course);
-    console.log("Address:", address);
+    if(!gender){
+        alert("Please select gender!");
+        return;
+    }
+
+    let student = {
+        fname, lname, email, password,
+        gender: gender.value,
+        dob, course, address
+    };
+
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+    students.push(student);
+    localStorage.setItem("students", JSON.stringify(students));
+
+    document.getElementById("output").innerHTML = `
+        <h3>Registered Successfully!</h3>
+        <p><b>Name:</b> ${fname} ${lname}</p>
+        <p><b>Email:</b> ${email}</p>
+    `;
 
 });
+
+// RESET
+document.querySelector(".reset").addEventListener("click", function(){
+    document.getElementById("output").innerHTML = "";
+});
+
+// TOGGLE PASSWORD
+function togglePassword(){
+    let p = document.getElementById("password");
+    p.type = p.type === "password" ? "text" : "password";
+}
+
+// ADMIN LOGIN
+function adminLogin(){
+    let pass = document.getElementById("adminPass").value;
+
+    if(pass === ADMIN_PASSWORD){
+        document.getElementById("adminPanel").style.display = "block";
+        loadStudents();
+    } else {
+        alert("Wrong password!");
+    }
+}
+
+// LOGOUT
+function adminLogout(){
+    document.getElementById("adminPanel").style.display = "none";
+}
+
+// LOAD
+function loadStudents(){
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+    displayStudents(students);
+}
+
+// DISPLAY
+function displayStudents(students){
+    let output = "";
+    document.getElementById("count").innerText = students.length;
+
+    students.forEach((s, index) => {
+        output += `
+            <div class="student-card">
+                <b>#${index+1}</b><br>
+                Name: ${s.fname} ${s.lname}<br>
+                Email: ${s.email}<br>
+                Gender: ${s.gender}<br>
+                Course: ${s.course}<br>
+
+                <button onclick="editStudent(${index})">Edit</button>
+                <button class="delete-btn" onclick="deleteStudent(${index})">Delete</button>
+            </div>
+        `;
+    });
+
+    document.getElementById("adminData").innerHTML = output;
+}
+
+// DELETE
+function deleteStudent(index){
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+    students.splice(index, 1);
+    localStorage.setItem("students", JSON.stringify(students));
+    loadStudents();
+}
+
+// EDIT
+function editStudent(index){
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+    let s = students[index];
+
+    document.getElementById("fname").value = s.fname;
+    document.getElementById("lname").value = s.lname;
+    document.getElementById("email").value = s.email;
+    document.getElementById("password").value = s.password;
+    document.getElementById("dob").value = s.dob;
+    document.getElementById("course").value = s.course;
+    document.getElementById("address").value = s.address;
+
+    alert("Edit and click Register to update!");
+
+    students.splice(index,1);
+    localStorage.setItem("students", JSON.stringify(students));
+    loadStudents();
+}
+
+// SEARCH
+function searchStudent(){
+    let val = document.getElementById("search").value.toLowerCase();
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    let filtered = students.filter(s =>
+        s.fname.toLowerCase().includes(val) ||
+        s.email.toLowerCase().includes(val)
+    );
+
+    displayStudents(filtered);
+}
+
+// EXPORT
+function exportData(){
+    let data = localStorage.getItem("students");
+    let blob = new Blob([data], {type:"application/json"});
+    let url = URL.createObjectURL(blob);
+
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "students.json";
+    a.click();
+}
+
+// CLEAR ALL
+function clearAll(){
+    if(confirm("Delete all data?")){
+        localStorage.removeItem("students");
+        loadStudents();
+    }
+}
 
 </script>
 
